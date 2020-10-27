@@ -9,7 +9,8 @@ import java.util.Random;
 
 public class Trick {
 
-  private static final String SUMMARY_FORMAT = "%1$s-influenced pile: %2$s%n\t%1$s count = %3$d%n";
+  private static final String SUMMARY_FORMAT =
+      "%1$s-influenced pile: %2$s%n\t%1$s count = %3$d%n";
 
   private final Deck deck;
   private final Pile redInfluenced;
@@ -42,18 +43,12 @@ public class Trick {
   }
 
   public void summarize() {
-    int redCount = 0;
-    for (Card card : redInfluenced) {
-      if (card.getSuit().getColor() == Color.RED) {
-        redCount++;
-      }
-    }
-    int blackCount = 0;
-    for (Card card : blackInfluenced) {
-      if (card.getSuit().getColor() == Color.BLACK) {
-        blackCount++;
-      }
-    }
+    long redCount = redInfluenced.stream()
+        .filter((card) -> card.getSuit().getColor() == Color.RED)
+        .count();
+    long blackCount = blackInfluenced.stream()
+        .filter((card) -> card.getSuit().getColor() == Color.BLACK)
+        .count();
     redInfluenced.sort();
     blackInfluenced.sort();
     System.out.printf(SUMMARY_FORMAT, "Red", redInfluenced, redCount);
@@ -66,4 +61,5 @@ public class Trick {
     trick.swap();
     trick.summarize();
   }
+
 }
