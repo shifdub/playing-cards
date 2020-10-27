@@ -18,7 +18,8 @@ public enum Suit {
 
   SPADES;
 
-  private static final char[] symbols= {'\u2663', '\u2662', '\u2661', '\u2660'};
+  private static final char[] symbols = {'\u2663', '\u2662', '\u2661', '\u2660'};
+
   public char getSymbol(){
     return symbols[ordinal()];
 
